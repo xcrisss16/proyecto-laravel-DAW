@@ -59,4 +59,9 @@ class ProductController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function show(Product $product)
+{
+    return view('products.show', compact('product'));
+}
 }
