@@ -1,0 +1,37 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Task;
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    use WithoutModelEvents;
+
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {
+        $admin = User::factory()->admin()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+        ]);
+
+        $student = User::factory()->create([
+            'name' => 'Student User',
+            'email' => 'student@example.com',
+        ]);
+
+        Task::factory()->count(4)->create([
+            'user_id' => $admin->id,
+        ]);
+
+        Task::factory()->count(4)->create([
+            'user_id' => $student->id,
+        ]);
+    }
+}
